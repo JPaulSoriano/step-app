@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:step/constant.dart';
 import 'package:step/models/api_response.dart';
-import 'package:step/models/user.dart';
+import 'package:step/models/user_model.dart';
 
 // Login user with email and password
 Future<ApiResponse> login(String email, String password) async {

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:step/constant.dart';
 import 'package:step/models/api_response.dart';
-import 'package:step/models/room.dart';
-import 'package:step/screens/roomdetail.dart';
+import 'package:step/models/room_model.dart';
+import 'package:step/screens/room_detail_screen.dart';
 import 'package:step/services/room_service.dart';
 import 'package:step/services/user_service.dart';
-import 'login.dart';
+import 'login_screen.dart';
 
 class RoomScreen extends StatefulWidget {
   @override

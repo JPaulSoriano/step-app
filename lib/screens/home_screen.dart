@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:step/screens/join.dart';
-import 'package:step/screens/profile.dart';
-import 'package:step/screens/room.dart';
+import 'package:step/screens/join_screen.dart';
+import 'package:step/screens/profile_screen.dart';
+import 'package:step/screens/room_screen.dart';
 import 'package:step/services/user_service.dart';
-import 'login.dart';
+import 'login_screen.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -60,8 +60,9 @@ class _HomeState extends State<Home> {
         shape: CircularNotchedRectangle(),
         child: BottomNavigationBar(
           items: [
-            BottomNavigationBarItem(icon: Icon(Icons.meeting_room), label: ''),
-            BottomNavigationBarItem(icon: Icon(Icons.person), label: '')
+            BottomNavigationBarItem(
+                icon: Icon(Icons.meeting_room), label: 'Rooms'),
+            BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile')
           ],
           currentIndex: currentIndex,
           onTap: (val) {

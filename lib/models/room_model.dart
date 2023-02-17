@@ -5,6 +5,7 @@ class Room {
   String? key;
   String? schedule;
   List<Announcement>? announcements;
+  List<Assessment>? assessments;
 
   Room(
       {this.id,
@@ -12,7 +13,8 @@ class Room {
       this.section,
       this.key,
       this.schedule,
-      this.announcements});
+      this.announcements,
+      this.assessments});
 
   // function to convert json data to user model
   factory Room.fromJson(Map<String, dynamic> json) {
@@ -24,6 +26,9 @@ class Room {
       schedule: json['schedule'],
       announcements: (json['announcements'] as List<dynamic>)
           .map((e) => Announcement.fromJson(e))
+          .toList(),
+      assessments: (json['assessments'] as List<dynamic>)
+          .map((e) => Assessment.fromJson(e))
           .toList(),
     );
   }
@@ -44,6 +49,24 @@ class Announcement {
       title: json['title'],
       body: json['body'],
       created: json['created_at'],
+    );
+  }
+}
+
+class Assessment {
+  int? id;
+  String? title;
+  String? startDate;
+  String? endDate;
+
+  Assessment({this.id, this.title, this.startDate, this.endDate});
+
+  factory Assessment.fromJson(Map<String, dynamic> json) {
+    return Assessment(
+      id: json['id'],
+      title: json['title'],
+      startDate: json['start_date'],
+      endDate: json['end_date'],
     );
   }
 }

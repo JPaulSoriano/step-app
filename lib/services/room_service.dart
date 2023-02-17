@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:step/constant.dart';
 import 'package:step/models/api_response.dart';
-import 'package:step/models/room.dart';
+import 'package:step/models/room_model.dart';
 import 'package:step/services/user_service.dart';
 
 // get all rooms

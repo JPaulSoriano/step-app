@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:step/constant.dart';
 import 'package:step/models/api_response.dart';
-import 'package:step/models/user.dart';
+import 'package:step/models/user_model.dart';
 import 'package:step/services/user_service.dart';
-import 'login.dart';
+import 'login_screen.dart';
 
 class Profile extends StatefulWidget {
   @override

@@ -1,6 +1,6 @@
 // Main function to run the app
 import 'package:flutter/material.dart';
-import 'screens/loading.dart';
+import 'screens/loading_screen.dart';
 
 void main() {
   runApp(App());
