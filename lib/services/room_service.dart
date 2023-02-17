@@ -15,9 +15,10 @@ Future<ApiResponse> getRooms() async {
       'Authorization': 'Bearer $token'
     });
 
+    // check response status code
     switch (response.statusCode) {
       case 200:
-        // print(response.body);
+        // convert response body to json and then map it to list of rooms
         apiResponse.data = jsonDecode(response.body)['data']
             .map((p) => Room.fromJson(p))
             .toList();
@@ -32,7 +33,6 @@ Future<ApiResponse> getRooms() async {
         break;
     }
   } catch (e) {
-    // print(e);
     apiResponse.error = serverError;
   }
   return apiResponse;
@@ -50,6 +50,7 @@ Future<ApiResponse> joinRoom(String roomKey) async {
       'key': roomKey,
     });
 
+    // check response status code
     switch (response.statusCode) {
       case 200:
         apiResponse.data = jsonDecode(response.body)['data'];

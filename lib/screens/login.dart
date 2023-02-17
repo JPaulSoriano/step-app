@@ -17,11 +17,17 @@ class _LoginState extends State<Login> {
   TextEditingController txtPassword = TextEditingController();
   bool loading = false;
 
+  // Login user with given email and password
   void _loginUser() async {
+    // Call the login API service
     ApiResponse response = await login(txtEmail.text, txtPassword.text);
+
+    // If no error, save the user data and redirect to home screen
     if (response.error == null) {
       _saveAndRedirectToHome(response.data as User);
-    } else {
+    }
+    // Otherwise, show an error message and stop the loading indicator
+    else {
       setState(() {
         loading = false;
       });
@@ -30,6 +36,7 @@ class _LoginState extends State<Login> {
     }
   }
 
+  // Save user data to shared preferences and redirect to home screen
   void _saveAndRedirectToHome(User user) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     await pref.setString('token', user.token ?? '');
@@ -50,21 +57,20 @@ class _LoginState extends State<Login> {
         child: ListView(
           padding: EdgeInsets.all(32),
           children: [
+            // Logo
             Padding(
               padding: const EdgeInsets.only(top: 60.0),
               child: Center(
                 child: Container(
                     width: 200,
                     height: 150,
-                    /*decoration: BoxDecoration(
-                        color: Colors.red,
-                        borderRadius: BorderRadius.circular(50.0)),*/
                     child: Image.asset('asset/images/flutter-logo.png')),
               ),
             ),
             SizedBox(
               height: 10,
             ),
+            // Email input
             TextFormField(
                 keyboardType: TextInputType.emailAddress,
                 controller: txtEmail,
@@ -74,6 +80,7 @@ class _LoginState extends State<Login> {
             SizedBox(
               height: 10,
             ),
+            // Password input
             TextFormField(
                 controller: txtPassword,
                 obscureText: true,
@@ -83,6 +90,7 @@ class _LoginState extends State<Login> {
             SizedBox(
               height: 10,
             ),
+            // Login button
             loading
                 ? Center(
                     child: CircularProgressIndicator(),

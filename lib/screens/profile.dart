@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:step/constant.dart';
 import 'package:step/models/api_response.dart';
 import 'package:step/models/user.dart';
 import 'package:step/services/user_service.dart';
-import '../constant.dart';
 import 'login.dart';
 
 class Profile extends StatefulWidget {
@@ -11,25 +11,29 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
-  User? user;
-  bool loading = true;
+  User? user; // store user details
+  bool loading = true; // to show/hide progress indicator
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
-  // get user detail
+  // get user details from API
   void getUser() async {
     ApiResponse response = await getUserDetail();
     if (response.error == null) {
+      // if there is no error
       setState(() {
-        user = response.data as User;
-        loading = false;
+        user = response.data as User; // update the user object
+        loading = false; // hide the progress indicator
       });
     } else if (response.error == unauthorized) {
+      // if token is not valid
       logout().then((value) => {
             Navigator.of(context).pushAndRemoveUntil(
                 MaterialPageRoute(builder: (context) => Login()),
-                (route) => false)
+                (route) =>
+                    false) // redirect to login page and remove other pages from the stack
           });
     } else {
+      // if there is any other error
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text('${response.error}')));
     }
@@ -37,13 +41,13 @@ class _ProfileState extends State<Profile> {
 
   @override
   void initState() {
-    getUser();
+    getUser(); // fetch user details on page load
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return loading
+    return loading // if the data is still being fetched
         ? Center(
             child: CircularProgressIndicator(),
           )

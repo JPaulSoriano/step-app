@@ -18,11 +18,14 @@ class _HomeState extends State<Home> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Step S'),
+
+        // Add a logout button to the app bar
         actions: [
           IconButton(
-            icon: Icon(Icons.exit_to_app),
+            icon: Icon(Icons.logout),
             onPressed: () {
               logout().then((value) => {
+                    // Navigate to the Login screen and remove all previous screens
                     Navigator.of(context).pushAndRemoveUntil(
                         MaterialPageRoute(builder: (context) => Login()),
                         (route) => false)
@@ -31,14 +34,25 @@ class _HomeState extends State<Home> {
           )
         ],
       ),
+
+      // Display either the RoomScreen or Profile widget based on the current index
       body: currentIndex == 0 ? RoomScreen() : Profile(),
+
+      // Add a floating action button to the screen
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.of(context)
-              .push(MaterialPageRoute(builder: (context) => JoinRoomForm()));
+          // Display a dialog to join a new room
+          showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return JoinRoomForm();
+            },
+          );
         },
         child: Icon(Icons.add),
       ),
+
+      // Add a bottom app bar with a BottomNavigationBar
       bottomNavigationBar: BottomAppBar(
         notchMargin: 5,
         elevation: 10,
@@ -51,6 +65,7 @@ class _HomeState extends State<Home> {
           ],
           currentIndex: currentIndex,
           onTap: (val) {
+            // Update the current index based on the tapped item
             setState(() {
               currentIndex = val;
             });

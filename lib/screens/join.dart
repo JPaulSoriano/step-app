@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:step/constant.dart';
 import 'package:step/models/api_response.dart';
-import 'package:step/screens/home.dart';
 import 'package:step/services/room_service.dart';
 
 class JoinRoomForm extends StatefulWidget {
@@ -14,66 +13,70 @@ class JoinRoomForm extends StatefulWidget {
 class _JoinRoomFormState extends State<JoinRoomForm> {
   final _formKey = GlobalKey<FormState>();
   String _roomKey = '';
-
   ApiResponse _apiResponse = ApiResponse();
 
   Future<void> _joinRoom() async {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
 
-      // Call the joinRoom function with the room key
+      // Call joinRoom function with the room key to join the room
       _apiResponse = await joinRoom(_roomKey);
 
       if (_apiResponse.error != null) {
-        // Handle error message
-        // print('Error: ${_apiResponse.error}');
+        // Display error message if there is an error in joining the room
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Error: ${_apiResponse.error}'),
+            content: Text('${_apiResponse.error}'),
           ),
         );
       } else {
-        // Handle success data
-        // print('Data: ${_apiResponse.data}');
+        // Display success message if the room is joined successfully
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text('${_apiResponse.data}'),
           ),
         );
-        Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => Home()),
-        );
+        Navigator.pop(context); // Pop the dialog after joining the room
       }
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(title: Text('Join Room')),
-        body: Form(
-          key: _formKey,
-          child: ListView(
-            padding: EdgeInsets.all(32),
-            children: [
-              TextFormField(
-                decoration: kInputDecoration('Room Key'),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter a room key';
-                  }
-                  return null;
-                },
-                onSaved: (value) {
-                  _roomKey = value!;
-                },
-              ),
-              ElevatedButton(
-                onPressed: _joinRoom,
-                child: Text('Join room'),
-              ),
-            ],
-          ),
-        ));
+    return AlertDialog(
+      title: Text('Join Room'),
+      content: Form(
+        key: _formKey,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            TextFormField(
+              decoration: kInputDecoration('Room Key'),
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Please enter a room key';
+                }
+                return null;
+              },
+              onSaved: (value) {
+                _roomKey = value!;
+              },
+            ),
+          ],
+        ),
+      ),
+      actions: [
+        TextButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          child: Text('Cancel'),
+        ),
+        ElevatedButton(
+          onPressed: _joinRoom,
+          child: Text('OK'),
+        ),
+      ],
+    );
   }
 }

@@ -1,6 +1,6 @@
-// ----- STRINGS ------
 import 'package:flutter/material.dart';
 
+// ------ API URLs ------
 const baseURL = 'http://174.138.23.47/api';
 const loginURL = baseURL + '/login';
 const logoutURL = baseURL + '/logout';
@@ -8,12 +8,14 @@ const userURL = baseURL + '/user';
 const roomURL = baseURL + '/rooms';
 const joinRoomURL = baseURL + '/join';
 
-// ----- Errors -----
+// ----- Error Messages -----
 const serverError = 'Server error';
 const unauthorized = 'Unauthorized';
 const somethingWentWrong = 'Something went wrong, try again!';
 
-// --- input decoration
+// ----- Input Decoration -----
+
+/// Returns an input decoration with a label and a border.
 InputDecoration kInputDecoration(String label) {
   return InputDecoration(
       labelText: label,
@@ -22,7 +24,9 @@ InputDecoration kInputDecoration(String label) {
           borderSide: BorderSide(width: 1, color: Colors.black)));
 }
 
-// button
+// ----- Button Widget -----
+
+/// Returns a text button with a label and an onPressed function.
 TextButton kTextButton(String label, Function onPressed) {
   return TextButton(
     child: Text(
