@@ -6,6 +6,7 @@ class Room {
   String? schedule;
   List<Announcement>? announcements;
   List<Assessment>? assessments;
+  List<Material>? materials;
 
   Room({
     this.id,
@@ -15,6 +16,7 @@ class Room {
     this.schedule,
     this.announcements,
     this.assessments,
+    this.materials,
   });
 
   // function to convert json data to user model
@@ -30,6 +32,9 @@ class Room {
           .toList(),
       assessments: (json['assessments'] as List<dynamic>)
           .map((e) => Assessment.fromJson(e))
+          .toList(),
+      materials: (json['materials'] as List<dynamic>)
+          .map((e) => Material.fromJson(e))
           .toList(),
     );
   }
@@ -66,6 +71,7 @@ class Assessment {
   int? items;
   String? startDate;
   String? endDate;
+  String? status;
 
   Assessment({
     this.id,
@@ -74,15 +80,41 @@ class Assessment {
     this.items,
     this.startDate,
     this.endDate,
+    this.status,
   });
 
   factory Assessment.fromJson(Map<String, dynamic> json) {
     return Assessment(
-        id: json['id'],
-        title: json['title'],
-        duration: json['duration'],
-        items: json['items'],
-        startDate: json['assessment_dates'][0]['start_date'],
-        endDate: json['assessment_dates'][0]['end_date']);
+      id: json['id'],
+      title: json['title'],
+      duration: json['duration'],
+      items: json['items'],
+      startDate: json['assessment_dates'][0]['start_date'],
+      endDate: json['assessment_dates'][0]['end_date'],
+      status: json['status'],
+    );
+  }
+}
+
+class Material {
+  int? id;
+  String? title;
+  String? description;
+  String? url;
+
+  Material({
+    this.id,
+    this.title,
+    this.description,
+    this.url,
+  });
+
+  factory Material.fromJson(Map<String, dynamic> json) {
+    return Material(
+      id: json['id'],
+      title: json['title'],
+      description: json['description'],
+      url: json['url'],
+    );
   }
 }
