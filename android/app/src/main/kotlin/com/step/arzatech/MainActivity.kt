@@ -1,4 +1,4 @@
-package com.example.step
+package com.step.arzatech
 
 import io.flutter.embedding.android.FlutterActivity
 
