@@ -4,6 +4,7 @@ class Room {
   String? section;
   String? key;
   String? schedule;
+  String? teacher;
   List<Announcement>? announcements;
   List<Assessment>? assessments;
   List<Material>? materials;
@@ -14,6 +15,7 @@ class Room {
     this.section,
     this.key,
     this.schedule,
+    this.teacher,
     this.announcements,
     this.assessments,
     this.materials,
@@ -26,6 +28,7 @@ class Room {
       name: json['name'],
       section: json['section'],
       key: json['key'],
+      teacher: json['teacher']['full_name'],
       schedule: json['schedule'],
       announcements: (json['announcements'] as List<dynamic>)
           .map((e) => Announcement.fromJson(e))

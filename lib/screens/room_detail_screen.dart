@@ -1,8 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:flutter_html/flutter_html.dart';
 import 'package:intl/intl.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:step/models/room_model.dart';
 import 'package:http/http.dart' as http;
 import 'package:step/screens/announcemen_detail_screen.dart';
@@ -111,7 +109,7 @@ class _RoomDetailScreenState extends State<RoomDetailScreen> {
 
   Widget _buildAssessments() {
     if (widget.room.assessments!.isEmpty) {
-      return Center(child: Text('No announcements'));
+      return Center(child: Text('No assessments'));
     } else {
       return ListView.builder(
         itemCount: widget.room.assessments!.length,

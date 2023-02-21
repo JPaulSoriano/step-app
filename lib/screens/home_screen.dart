@@ -18,7 +18,8 @@ class _HomeState extends State<Home> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Step S'),
-
+        elevation: 0,
+        scrolledUnderElevation: 2,
         // Add a logout button to the app bar
         actions: [
           IconButton(
@@ -51,7 +52,7 @@ class _HomeState extends State<Home> {
         },
         child: Icon(Icons.add),
       ),
-
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       // Add a bottom app bar with a BottomNavigationBar
       bottomNavigationBar: BottomAppBar(
         notchMargin: 5,

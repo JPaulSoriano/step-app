@@ -72,7 +72,7 @@ class _JoinRoomFormState extends State<JoinRoomForm> {
           },
           child: Text('Cancel'),
         ),
-        ElevatedButton(
+        TextButton(
           onPressed: _joinRoom,
           child: Text('OK'),
         ),
