@@ -134,7 +134,7 @@ class _RoomScreenState extends State<RoomScreen> {
   int userId = 0;
   bool _loading = true;
   Timer? _timer;
-  Duration _duration = Duration(seconds: 3); // retrieve data every 3 seconds
+  Duration _duration = Duration(seconds: 15); // retrieve data every 15 seconds
 
   // retrieve all rooms and update the state
   Future<void> retrieveRooms() async {

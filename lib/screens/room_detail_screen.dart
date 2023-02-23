@@ -204,23 +204,4 @@ class _RoomDetailScreenState extends State<RoomDetailScreen> {
       ),
     );
   }
-
-  // Future<void> _downloadFile(String url) async {
-  //   final response = await http.get(Uri.parse(url));
-
-  //   final fileName = url.split('/').last;
-  //   final dir = await getExternalStorageDirectory();
-  //   final downloadsDir = Directory('${dir!.path}/Downloads');
-  //   await downloadsDir.create(recursive: true);
-  //   final filePath = '${downloadsDir.path}/$fileName';
-  //   final file = File(filePath);
-
-  //   await file.writeAsBytes(response.bodyBytes);
-
-  //   ScaffoldMessenger.of(context).showSnackBar(
-  //     SnackBar(
-  //       content: Text('File downloaded to ${file.path}'),
-  //     ),
-  //   );
-  // }
 }
