@@ -43,12 +43,14 @@ class _JoinRoomFormState extends State<JoinRoomForm> {
 
   @override
   Widget build(BuildContext context) {
-    return AlertDialog(
-      title: Text('Join Room'),
-      content: Form(
+    return Scaffold(
+      appBar: new AppBar(
+        title: new Text('Join Room'),
+      ),
+      body: Form(
         key: _formKey,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
+        child: ListView(
+          padding: EdgeInsets.all(32),
           children: [
             TextFormField(
               decoration: kInputDecoration('Room Key'),
@@ -62,21 +64,13 @@ class _JoinRoomFormState extends State<JoinRoomForm> {
                 _roomKey = value!;
               },
             ),
+            ElevatedButton(
+              onPressed: _joinRoom,
+              child: Text('OK'),
+            ),
           ],
         ),
       ),
-      actions: [
-        TextButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          child: Text('Cancel'),
-        ),
-        TextButton(
-          onPressed: _joinRoom,
-          child: Text('OK'),
-        ),
-      ],
     );
   }
 }

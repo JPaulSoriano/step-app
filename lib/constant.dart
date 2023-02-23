@@ -7,6 +7,7 @@ const logoutURL = baseURL + '/logout';
 const userURL = baseURL + '/user';
 const roomURL = baseURL + '/rooms';
 const joinRoomURL = baseURL + '/join';
+const NotificationURL = baseURL + '/notifications';
 
 // ----- Error Messages -----
 const serverError = 'Server error';

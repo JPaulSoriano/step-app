@@ -23,7 +23,27 @@ class _RoomDetailScreenState extends State<RoomDetailScreen> {
       appBar: AppBar(
         title: Text(widget.room.name!),
       ),
-      body: _buildBody(),
+      body: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: ListTile(
+              title: Text(
+                widget.room.section!,
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+              subtitle: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(widget.room.teacher!),
+                  Text(widget.room.key!),
+                ],
+              ),
+            ),
+          ),
+          Expanded(child: _buildBody()),
+        ],
+      ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         onTap: (index) {
@@ -67,10 +87,12 @@ class _RoomDetailScreenState extends State<RoomDetailScreen> {
       return Center(child: Text('No announcements'));
     } else {
       return ListView.builder(
+        padding: EdgeInsets.all(16),
         itemCount: widget.room.announcements!.length,
         itemBuilder: (context, index) {
           final announcement = widget.room.announcements![index];
           return Card(
+            elevation: 0,
             child: InkWell(
               onTap: () {
                 Navigator.push(
@@ -112,10 +134,12 @@ class _RoomDetailScreenState extends State<RoomDetailScreen> {
       return Center(child: Text('No assessments'));
     } else {
       return ListView.builder(
+        padding: EdgeInsets.all(16),
         itemCount: widget.room.assessments!.length,
         itemBuilder: (context, index) {
           final assessment = widget.room.assessments![index];
           return Card(
+            elevation: 0,
             child: Padding(
               padding: EdgeInsets.all(16.0),
               child: Column(
@@ -154,10 +178,12 @@ class _RoomDetailScreenState extends State<RoomDetailScreen> {
       return Center(child: Text('No materials'));
     } else {
       return ListView.builder(
+        padding: EdgeInsets.all(16),
         itemCount: widget.room.materials!.length,
         itemBuilder: (context, index) {
           final material = widget.room.materials![index];
           return Card(
+            elevation: 0,
             child: InkWell(
               onTap: () {
                 _downloadFile(material.url!);

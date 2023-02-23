@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:step/screens/join_screen.dart';
+import 'package:step/screens/notification_screen.dart';
 import 'package:step/screens/profile_screen.dart';
 import 'package:step/screens/room_screen.dart';
 import 'package:step/services/user_service.dart';
@@ -11,7 +12,19 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  int currentIndex = 0;
+  int _selectedIndex = 0;
+
+  static List<Widget> _widgetOptions = <Widget>[
+    RoomScreen(),
+    Profile(),
+    NotificationsScreen(),
+  ];
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,42 +50,41 @@ class _HomeState extends State<Home> {
       ),
 
       // Display either the RoomScreen or Profile widget based on the current index
-      body: currentIndex == 0 ? RoomScreen() : Profile(),
+      body: Center(
+        child: _widgetOptions.elementAt(_selectedIndex),
+      ),
 
       // Add a floating action button to the screen
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           // Display a dialog to join a new room
-          showDialog(
-            context: context,
-            builder: (BuildContext context) {
-              return JoinRoomForm();
-            },
-          );
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => JoinRoomForm(),
+              ));
         },
         child: Icon(Icons.add),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       // Add a bottom app bar with a BottomNavigationBar
-      bottomNavigationBar: BottomAppBar(
-        notchMargin: 5,
-        elevation: 10,
-        clipBehavior: Clip.antiAlias,
-        shape: CircularNotchedRectangle(),
-        child: BottomNavigationBar(
-          items: [
-            BottomNavigationBarItem(
-                icon: Icon(Icons.meeting_room), label: 'Rooms'),
-            BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile')
-          ],
-          currentIndex: currentIndex,
-          onTap: (val) {
-            // Update the current index based on the tapped item
-            setState(() {
-              currentIndex = val;
-            });
-          },
-        ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Room',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'Profile',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.notifications),
+            label: 'Notifications',
+          ),
+        ],
+        currentIndex: _selectedIndex,
+        selectedItemColor: Colors.blue,
+        onTap: _onItemTapped,
       ),
     );
   }

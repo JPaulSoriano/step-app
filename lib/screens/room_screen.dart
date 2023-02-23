@@ -181,6 +181,7 @@ class _RoomScreenState extends State<RoomScreen> {
             child:
                 CircularProgressIndicator()) // display loading indicator if rooms are still being retrieved
         : ListView.builder(
+            padding: EdgeInsets.all(16),
             itemCount: _roomList.length,
             itemBuilder: (BuildContext context, int index) {
               Room room = _roomList[index];
@@ -197,6 +198,7 @@ class _RoomScreenState extends State<RoomScreen> {
                   );
                 },
                 child: Card(
+                  elevation: 0,
                   child: Padding(
                     padding: const EdgeInsets.all(16.0),
                     child: ListTile(
@@ -208,21 +210,6 @@ class _RoomScreenState extends State<RoomScreen> {
                       subtitle: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            '${room.teacher}',
-                            style: TextStyle(
-                                fontSize: 16, fontWeight: FontWeight.normal),
-                          ),
-                          Text(
-                            '${room.section}',
-                            style: TextStyle(
-                                fontSize: 16, fontWeight: FontWeight.normal),
-                          ),
-                          Text(
-                            '${room.key}',
-                            style: TextStyle(
-                                fontSize: 12, fontWeight: FontWeight.normal),
-                          ),
                           Text(
                             room.schedule?.isEmpty ?? true
                                 ? 'Schedule not set by the teacher'
