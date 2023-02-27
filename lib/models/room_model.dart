@@ -8,6 +8,7 @@ class Room {
   List<Announcement>? announcements;
   List<Assessment>? assessments;
   List<Material>? materials;
+  List<Assignment>? assignments;
 
   Room({
     this.id,
@@ -19,6 +20,7 @@ class Room {
     this.announcements,
     this.assessments,
     this.materials,
+    this.assignments,
   });
 
   // function to convert json data to user model
@@ -38,6 +40,9 @@ class Room {
           .toList(),
       materials: (json['materials'] as List<dynamic>)
           .map((e) => Material.fromJson(e))
+          .toList(),
+      assignments: (json['assignments'] as List<dynamic>)
+          .map((e) => Assignment.fromJson(e))
           .toList(),
     );
   }
@@ -118,6 +123,26 @@ class Material {
       title: json['title'],
       description: json['description'],
       url: json['url'],
+    );
+  }
+}
+
+class Assignment {
+  int? id;
+  String? title;
+  String? due_date;
+
+  Assignment({
+    this.id,
+    this.title,
+    this.due_date,
+  });
+
+  factory Assignment.fromJson(Map<String, dynamic> json) {
+    return Assignment(
+      id: json['id'],
+      title: json['title'],
+      due_date: json['due_date'],
     );
   }
 }

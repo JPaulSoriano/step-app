@@ -42,7 +42,6 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
         ),
         Expanded(
           child: ListView.builder(
-            padding: EdgeInsets.all(16),
             itemCount: notifications.length,
             itemBuilder: (BuildContext context, int index) {
               final notification = notifications[index];

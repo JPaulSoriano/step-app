@@ -18,6 +18,8 @@ class _AnnouncementDetailScreenState extends State<AnnouncementDetailScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
+        scrolledUnderElevation: 2,
         title: Text(
           widget.announcement.title?.isEmpty ?? true
               ? 'No Title'

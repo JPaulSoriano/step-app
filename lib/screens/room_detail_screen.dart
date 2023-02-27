@@ -22,29 +22,29 @@ class _RoomDetailScreenState extends State<RoomDetailScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.room.name!),
+        elevation: 0,
+        scrolledUnderElevation: 2,
       ),
       body: Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: ListTile(
-              title: Text(
-                widget.room.section!,
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              ),
-              subtitle: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(widget.room.teacher!),
-                  Text(widget.room.key!),
-                ],
-              ),
+          ListTile(
+            title: Text(
+              widget.room.section!,
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+            subtitle: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(widget.room.teacher!),
+                Text(widget.room.key!),
+              ],
             ),
           ),
           Expanded(child: _buildBody()),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
         currentIndex: _currentIndex,
         onTap: (index) {
           setState(() {
@@ -57,12 +57,16 @@ class _RoomDetailScreenState extends State<RoomDetailScreen> {
             label: 'Announcements',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.assignment),
+            icon: Icon(Icons.assessment),
             label: 'Assessments',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.edit_document),
             label: 'Materials',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.assignment),
+            label: 'Assignments',
           ),
         ],
       ),
@@ -76,7 +80,9 @@ class _RoomDetailScreenState extends State<RoomDetailScreen> {
       case 1:
         return _buildAssessments();
       case 2:
-        return _buildAMaterials();
+        return _buildMaterials();
+      case 3:
+        return _buildAssignments();
       default:
         return Container();
     }
@@ -87,7 +93,6 @@ class _RoomDetailScreenState extends State<RoomDetailScreen> {
       return Center(child: Text('No announcements'));
     } else {
       return ListView.builder(
-        padding: EdgeInsets.all(16),
         itemCount: widget.room.announcements!.length,
         itemBuilder: (context, index) {
           final announcement = widget.room.announcements![index];
@@ -134,7 +139,6 @@ class _RoomDetailScreenState extends State<RoomDetailScreen> {
       return Center(child: Text('No assessments'));
     } else {
       return ListView.builder(
-        padding: EdgeInsets.all(16),
         itemCount: widget.room.assessments!.length,
         itemBuilder: (context, index) {
           final assessment = widget.room.assessments![index];
@@ -173,12 +177,11 @@ class _RoomDetailScreenState extends State<RoomDetailScreen> {
     }
   }
 
-  Widget _buildAMaterials() {
+  Widget _buildMaterials() {
     if (widget.room.materials!.isEmpty) {
       return Center(child: Text('No materials'));
     } else {
       return ListView.builder(
-        padding: EdgeInsets.all(16),
         itemCount: widget.room.materials!.length,
         itemBuilder: (context, index) {
           final material = widget.room.materials![index];
@@ -205,6 +208,38 @@ class _RoomDetailScreenState extends State<RoomDetailScreen> {
                     ),
                   ],
                 ),
+              ),
+            ),
+          );
+        },
+      );
+    }
+  }
+
+  Widget _buildAssignments() {
+    if (widget.room.assignments!.isEmpty) {
+      return Center(child: Text('No assignments'));
+    } else {
+      return ListView.builder(
+        itemCount: widget.room.assignments!.length,
+        itemBuilder: (context, index) {
+          final assignment = widget.room.assignments![index];
+          return Card(
+            elevation: 0,
+            child: Padding(
+              padding: EdgeInsets.all(16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    assignment.title!,
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  ),
+                  Text(
+                    'Due Date: ${DateFormat.yMMMMd().format(DateTime.parse(assignment.due_date!))}',
+                    style: TextStyle(fontSize: 12, color: Colors.grey),
+                  ),
+                ],
               ),
             ),
           );
