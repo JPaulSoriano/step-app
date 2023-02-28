@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:step/models/room_model.dart';
 import 'package:http/http.dart' as http;
-import 'package:step/screens/announcemen_detail_screen.dart';
+import 'package:step/screens/announcement_detail_screen.dart';
+import 'package:step/screens/assignment_detail_screen.dart';
 
 class RoomDetailScreen extends StatefulWidget {
   final Room room;
@@ -22,22 +23,35 @@ class _RoomDetailScreenState extends State<RoomDetailScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.room.name!),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.videocam),
+            onPressed: () {},
+          ),
+        ],
         elevation: 0,
         scrolledUnderElevation: 2,
       ),
       body: Column(
         children: [
-          ListTile(
-            title: Text(
-              widget.room.section!,
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-            subtitle: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(widget.room.teacher!),
-                Text(widget.room.key!),
-              ],
+          Card(
+            color: Colors.grey[300],
+            elevation: 0,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ListTile(
+                title: Text(
+                  widget.room.section!,
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+                subtitle: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(widget.room.teacher!),
+                    Text(widget.room.key!),
+                  ],
+                ),
+              ),
             ),
           ),
           Expanded(child: _buildBody()),
@@ -226,20 +240,32 @@ class _RoomDetailScreenState extends State<RoomDetailScreen> {
           final assignment = widget.room.assignments![index];
           return Card(
             elevation: 0,
-            child: Padding(
-              padding: EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(
-                    assignment.title!,
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            child: InkWell(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        AssignmentDetailScreen(assignment: assignment),
                   ),
-                  Text(
-                    'Due Date: ${DateFormat.yMMMMd().format(DateTime.parse(assignment.due_date!))}',
-                    style: TextStyle(fontSize: 12, color: Colors.grey),
-                  ),
-                ],
+                );
+              },
+              child: Padding(
+                padding: EdgeInsets.all(16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      assignment.title!,
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      'Due Date: ${DateFormat.yMMMMd().format(DateTime.parse(assignment.due_date!))}',
+                      style: TextStyle(fontSize: 12, color: Colors.grey),
+                    ),
+                  ],
+                ),
               ),
             ),
           );
