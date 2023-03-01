@@ -11,6 +11,15 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(
+        primaryColor: Colors.blueGrey,
+        colorScheme: ColorScheme.fromSwatch().copyWith(
+          secondary: Colors.blueGrey,
+          primary: Colors.blueGrey,
+        ),
+        textTheme:
+            const TextTheme(bodyMedium: TextStyle(color: Colors.black87)),
+      ),
       debugShowCheckedModeBanner: false, // Hide the debug banner
       home: Loading(), // Set the initial route of the app to Loading screen
     );

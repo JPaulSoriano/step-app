@@ -45,7 +45,10 @@ class _JoinRoomFormState extends State<JoinRoomForm> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: new AppBar(
-        title: new Text('Join Room'),
+        elevation: 0,
+        title: new Text(
+          'Join Room',
+        ),
       ),
       body: Form(
         key: _formKey,

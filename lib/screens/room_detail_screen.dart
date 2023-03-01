@@ -22,7 +22,9 @@ class _RoomDetailScreenState extends State<RoomDetailScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.room.name!),
+        title: Text(
+          widget.room.name!,
+        ),
         actions: [
           IconButton(
             icon: Icon(Icons.videocam),
@@ -35,20 +37,31 @@ class _RoomDetailScreenState extends State<RoomDetailScreen> {
       body: Column(
         children: [
           Card(
-            color: Colors.grey[300],
+            color: Colors.blueGrey[500],
             elevation: 0,
             child: Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(24.0),
               child: ListTile(
                 title: Text(
                   widget.room.section!,
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white),
                 ),
                 subtitle: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(widget.room.teacher!),
-                    Text(widget.room.key!),
+                    Text(widget.room.teacher!,
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: Colors.white,
+                        )),
+                    Text(widget.room.key!,
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: Colors.white,
+                        )),
                   ],
                 ),
               ),
@@ -111,7 +124,6 @@ class _RoomDetailScreenState extends State<RoomDetailScreen> {
         itemBuilder: (context, index) {
           final announcement = widget.room.announcements![index];
           return Card(
-            elevation: 0,
             child: InkWell(
               onTap: () {
                 Navigator.push(
@@ -157,7 +169,6 @@ class _RoomDetailScreenState extends State<RoomDetailScreen> {
         itemBuilder: (context, index) {
           final assessment = widget.room.assessments![index];
           return Card(
-            elevation: 0,
             child: Padding(
               padding: EdgeInsets.all(16.0),
               child: Column(
@@ -200,7 +211,6 @@ class _RoomDetailScreenState extends State<RoomDetailScreen> {
         itemBuilder: (context, index) {
           final material = widget.room.materials![index];
           return Card(
-            elevation: 0,
             child: InkWell(
               onTap: () {
                 _downloadFile(material.url!);
@@ -239,7 +249,6 @@ class _RoomDetailScreenState extends State<RoomDetailScreen> {
         itemBuilder: (context, index) {
           final assignment = widget.room.assignments![index];
           return Card(
-            elevation: 0,
             child: InkWell(
               onTap: () {
                 Navigator.push(

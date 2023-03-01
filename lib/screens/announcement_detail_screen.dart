@@ -20,11 +20,9 @@ class _AnnouncementDetailScreenState extends State<AnnouncementDetailScreen> {
       appBar: AppBar(
         elevation: 0,
         scrolledUnderElevation: 2,
-        title: Text(
-          widget.announcement.title?.isEmpty ?? true
-              ? 'No Title'
-              : widget.announcement.title!,
-        ),
+        title: Text(widget.announcement.title?.isEmpty ?? true
+            ? 'No Title'
+            : widget.announcement.title!),
       ),
       body: SingleChildScrollView(
         child: Padding(

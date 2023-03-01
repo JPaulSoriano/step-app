@@ -45,13 +45,19 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
             itemCount: notifications.length,
             itemBuilder: (BuildContext context, int index) {
               final notification = notifications[index];
-              return ListTile(
-                title: Text(notification['data']['type'],
-                    style:
-                        TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-                subtitle: Text(notification['data']['title']),
-                trailing: Text(
-                    'Due: ${DateFormat.yMMMMd().format(DateTime.parse(notification['data']['due_date']))}'),
+              return Card(
+                child: ListTile(
+                  title: Text(notification['data']['type'],
+                      style:
+                          TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
+                  subtitle: Text(notification['data']['title'],
+                      style: TextStyle(fontSize: 12, color: Colors.grey)),
+                  trailing: Text(
+                      'Due: ${DateFormat.yMMMMd().format(DateTime.parse(
+                        notification['data']['due_date'],
+                      ))}',
+                      style: TextStyle(fontSize: 10, color: Colors.grey)),
+                ),
               );
             },
           ),

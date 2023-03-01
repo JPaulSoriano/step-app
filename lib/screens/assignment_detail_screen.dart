@@ -1,6 +1,6 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 import 'package:step/models/room_model.dart';
 
@@ -19,11 +19,9 @@ class _AssignmentDetailScreenState extends State<AssignmentDetailScreen> {
       appBar: AppBar(
         elevation: 0,
         scrolledUnderElevation: 2,
-        title: Text(
-          widget.assignment.title?.isEmpty ?? true
-              ? 'No Title'
-              : widget.assignment.title!,
-        ),
+        title: Text(widget.assignment.title?.isEmpty ?? true
+            ? 'No Title'
+            : widget.assignment.title!),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -39,7 +37,7 @@ class _AssignmentDetailScreenState extends State<AssignmentDetailScreen> {
               ),
               SizedBox(height: 8),
               Text(
-                'Due: ${DateFormat.yMMMMd().format(DateTime.parse(widget.assignment.due_date!))}',
+                'Due ${DateFormat.yMMMMd().format(DateTime.parse(widget.assignment.due_date!))}',
                 style: TextStyle(fontSize: 12, color: Colors.grey),
               ),
               Text(
@@ -55,9 +53,41 @@ class _AssignmentDetailScreenState extends State<AssignmentDetailScreen> {
                 widget.assignment.instructions!,
                 style: TextStyle(fontSize: 12, color: Colors.grey),
               ),
+              SizedBox(height: 24),
+              Text(
+                'Attachements',
+                style: TextStyle(
+                    fontSize: 12,
+                    color: Colors.grey,
+                    fontWeight: FontWeight.bold),
+              ),
+              OutlinedButton(
+                onPressed: () {
+                  _downloadFile(widget.assignment.url!);
+                },
+                child: Text(widget.assignment.file!),
+              ),
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  Future<void> _downloadFile(String url) async {
+    final response = await http.get(Uri.parse(url));
+
+    final fileName = url.split('/').last;
+    final downloadsDir = Directory('/storage/emulated/0/Download');
+    await downloadsDir.create(recursive: true);
+    final filePath = '${downloadsDir.path}/$fileName';
+    final file = File(filePath);
+
+    await file.writeAsBytes(response.bodyBytes);
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('File downloaded to ${file.path}'),
       ),
     );
   }

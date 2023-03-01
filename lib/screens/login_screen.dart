@@ -49,8 +49,8 @@ class _LoginState extends State<Login> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
         title: Text('Login'),
-        centerTitle: true,
       ),
       body: Form(
         key: formkey,
@@ -95,14 +95,17 @@ class _LoginState extends State<Login> {
                 ? Center(
                     child: CircularProgressIndicator(),
                   )
-                : kTextButton('Login', () {
-                    if (formkey.currentState!.validate()) {
-                      setState(() {
-                        loading = true;
-                        _loginUser();
-                      });
-                    }
-                  }),
+                : ElevatedButton(
+                    onPressed: () {
+                      if (formkey.currentState!.validate()) {
+                        setState(() {
+                          loading = true;
+                          _loginUser();
+                        });
+                      }
+                    },
+                    child: Text('OK'),
+                  ),
           ],
         ),
       ),

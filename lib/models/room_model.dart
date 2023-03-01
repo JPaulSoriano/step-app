@@ -139,6 +139,8 @@ class Assignment {
   int? allowed_submission;
   String? due_date;
   String? instructions;
+  String? url;
+  String? file;
 
   Assignment({
     this.id,
@@ -147,6 +149,8 @@ class Assignment {
     this.allowed_submission,
     this.due_date,
     this.instructions,
+    this.url,
+    this.file,
   });
 
   factory Assignment.fromJson(Map<String, dynamic> json) {
@@ -157,6 +161,8 @@ class Assignment {
       allowed_submission: json['allowed_submission'],
       due_date: json['due_date'],
       instructions: json['instructions'],
+      url: json['url'],
+      file: json['file'],
     );
   }
 }

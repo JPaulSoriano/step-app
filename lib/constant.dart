@@ -27,18 +27,3 @@ InputDecoration kInputDecoration(String label) {
 
 // ----- Button Widget -----
 
-/// Returns a text button with a label and an onPressed function.
-TextButton kTextButton(String label, Function onPressed) {
-  return TextButton(
-    child: Text(
-      label,
-      style: TextStyle(color: Colors.white),
-    ),
-    style: ButtonStyle(
-        backgroundColor:
-            MaterialStateColor.resolveWith((states) => Colors.blue),
-        padding: MaterialStateProperty.resolveWith(
-            (states) => EdgeInsets.symmetric(vertical: 10))),
-    onPressed: () => onPressed(),
-  );
-}
