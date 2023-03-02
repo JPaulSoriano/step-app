@@ -39,7 +39,8 @@ dependencies:
   shared_preferences: ^2.0.17
   flutter_html: ^2.2.1
   intl: ^0.18.0
-  
+  mime: ^1.0.4
+  file_picker: ^5.2.5
 
 dev_dependencies:
   flutter_test:

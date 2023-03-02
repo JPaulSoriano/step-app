@@ -49,14 +49,14 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                 child: ListTile(
                   title: Text(notification['data']['type'],
                       style:
-                          TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                   subtitle: Text(notification['data']['title'],
-                      style: TextStyle(fontSize: 12, color: Colors.grey)),
+                      style: TextStyle(fontSize: 14, color: Colors.grey)),
                   trailing: Text(
                       'Due: ${DateFormat.yMMMMd().format(DateTime.parse(
                         notification['data']['due_date'],
                       ))}',
-                      style: TextStyle(fontSize: 10, color: Colors.grey)),
+                      style: TextStyle(fontSize: 12, color: Colors.grey)),
                 ),
               );
             },
