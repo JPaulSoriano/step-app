@@ -1,14 +1,7 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:intl/intl.dart';
-import 'package:step/constant.dart';
 import 'package:step/models/announcement_model.dart';
-import 'package:step/models/api_response.dart';
-import 'package:step/screens/login_screen.dart';
-import 'package:http/http.dart' as http;
-import 'package:step/services/user_service.dart';
 
 class AnnouncementDetailScreen extends StatefulWidget {
   final Announcement announcement;
@@ -21,66 +14,6 @@ class AnnouncementDetailScreen extends StatefulWidget {
 }
 
 class _AnnouncementDetailScreenState extends State<AnnouncementDetailScreen> {
-  TextEditingController _txtCommentController = TextEditingController();
-  bool _loading = true;
-
-  Future<ApiResponse> createComment(int postId, String? body) async {
-    ApiResponse apiResponse = ApiResponse();
-    try {
-      String token = await getToken();
-      final response = await http.post(
-          Uri.parse('${CommentUrl}/${widget.announcement.id}/comment'),
-          headers: {
-            'Accept': 'application/json',
-            'Authorization': 'Bearer $token'
-          },
-          body: {
-            'body': body
-          });
-
-      switch (response.statusCode) {
-        case 200:
-          apiResponse.data = jsonDecode(response.body);
-          break;
-        case 403:
-          apiResponse.error = jsonDecode(response.body)['message'];
-          break;
-        case 401:
-          apiResponse.error = unauthorized;
-          break;
-        default:
-          apiResponse.error = somethingWentWrong;
-          break;
-      }
-    } catch (e) {
-      print(e);
-      apiResponse.error = serverError;
-    }
-    return apiResponse;
-  }
-
-  // create comment
-  void _createComment() async {
-    ApiResponse response = await createComment(
-        widget.announcement.id ?? 0, _txtCommentController.text);
-
-    if (response.error == null) {
-      _txtCommentController.clear();
-    } else if (response.error == unauthorized) {
-      logout().then((value) => {
-            Navigator.of(context).pushAndRemoveUntil(
-                MaterialPageRoute(builder: (context) => Login()),
-                (route) => false)
-          });
-    } else {
-      setState(() {
-        _loading = false;
-      });
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text('${response.error}')));
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -118,27 +51,6 @@ class _AnnouncementDetailScreenState extends State<AnnouncementDetailScreen> {
                 ),
               ),
             ),
-          ),
-          Row(
-            children: [
-              Expanded(
-                child: TextFormField(
-                  decoration: kInputDecoration('Comment'),
-                  controller: _txtCommentController,
-                ),
-              ),
-              IconButton(
-                icon: Icon(Icons.send),
-                onPressed: () {
-                  if (_txtCommentController.text.isNotEmpty) {
-                    setState(() {
-                      _loading = true;
-                    });
-                    _createComment();
-                  }
-                },
-              )
-            ],
           ),
           Expanded(
             child: SingleChildScrollView(
