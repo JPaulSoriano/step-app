@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:step/models/room_model.dart';
+import 'package:step/constant.dart';
+import 'package:step/models/assignment_model.dart';
 import 'package:step/services/user_service.dart';
 
 class AssignmentDetailScreen extends StatefulWidget {
@@ -41,8 +42,7 @@ class _AssignmentDetailScreenState extends State<AssignmentDetailScreen> {
     String token = await getToken();
     final request = http.MultipartRequest(
       'POST',
-      Uri.parse(
-          'http://143.198.213.49/api/assignments/${widget.assignment.id}/submit'),
+      Uri.parse('${SubmitAssignmentURL}/${widget.assignment.id}/submit'),
     );
 
     request.fields['assignment_id'] = widget.assignment.id.toString();
@@ -101,7 +101,7 @@ class _AssignmentDetailScreenState extends State<AssignmentDetailScreen> {
               ),
               SizedBox(height: 8),
               Text(
-                'Due ${DateFormat.yMMMMd().format(DateTime.parse(widget.assignment.due_date!))}',
+                'Due: ${DateFormat.yMMMMd().format(DateTime.parse(widget.assignment.due_date!))}',
                 style: TextStyle(fontSize: 12, color: Colors.grey),
               ),
               Text(

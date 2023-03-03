@@ -8,6 +8,8 @@ const userURL = baseURL + '/user';
 const roomURL = baseURL + '/rooms';
 const joinRoomURL = baseURL + '/join';
 const NotificationURL = baseURL + '/notifications';
+const SubmitAssignmentURL = baseURL + '/assignments';
+const CommentUrl = baseURL + '/announcements';
 
 // ----- Error Messages -----
 const serverError = 'Server error';

@@ -14,6 +14,7 @@ Future<ApiResponse> getRooms() async {
       'Accept': 'application/json',
       'Authorization': 'Bearer $token'
     });
+
     // check response status code
     switch (response.statusCode) {
       case 200:
@@ -32,6 +33,7 @@ Future<ApiResponse> getRooms() async {
         break;
     }
   } catch (e) {
+    print(e);
     apiResponse.error = serverError;
   }
   return apiResponse;
