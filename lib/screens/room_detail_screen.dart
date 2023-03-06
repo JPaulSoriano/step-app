@@ -1,9 +1,10 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:intl/intl.dart';
 import 'package:step/models/room_model.dart';
 import 'package:http/http.dart' as http;
-import 'package:step/screens/announcement_detail_screen.dart';
+import 'package:step/screens/announcement_comment_screen.dart';
 import 'package:step/screens/assignment_detail_screen.dart';
 
 class RoomDetailScreen extends StatefulWidget {
@@ -45,7 +46,7 @@ class _RoomDetailScreenState extends State<RoomDetailScreen> {
                 title: Text(
                   widget.room.section!,
                   style: TextStyle(
-                      fontSize: 18,
+                      fontSize: 20,
                       fontWeight: FontWeight.bold,
                       color: Colors.white),
                 ),
@@ -130,7 +131,7 @@ class _RoomDetailScreenState extends State<RoomDetailScreen> {
                   context,
                   MaterialPageRoute(
                     builder: (context) =>
-                        AnnouncementDetailScreen(announcement: announcement),
+                        AnnouncementCommentScreen(announcement: announcement),
                   ),
                 );
               },
@@ -150,6 +151,11 @@ class _RoomDetailScreenState extends State<RoomDetailScreen> {
                       '${DateFormat.yMMMMd().format(DateTime.parse(announcement.created!))}',
                       style: TextStyle(fontSize: 12, color: Colors.grey),
                     ),
+                    Html(data: announcement.body),
+                    Text(
+                      '${announcement.commentCount} class comments',
+                      style: TextStyle(fontSize: 12, color: Colors.grey),
+                    )
                   ],
                 ),
               ),

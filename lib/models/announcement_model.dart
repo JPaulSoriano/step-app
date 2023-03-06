@@ -26,4 +26,5 @@ class Announcement {
           .toList(),
     );
   }
+  int get commentCount => comments?.length ?? 0;
 }
