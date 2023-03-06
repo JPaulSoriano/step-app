@@ -5,6 +5,7 @@ class Announcement {
   String? title;
   String? body;
   String? created;
+  String? user;
   List<Comment>? comments;
 
   Announcement({
@@ -12,6 +13,7 @@ class Announcement {
     this.title,
     this.body,
     this.created,
+    this.user,
     this.comments,
   });
 
@@ -21,6 +23,7 @@ class Announcement {
       title: json['title'],
       body: json['body'],
       created: json['created_at'],
+      user: json['user']['full_name'],
       comments: (json['comments'] as List<dynamic>)
           .map((e) => Comment.fromJson(e))
           .toList(),

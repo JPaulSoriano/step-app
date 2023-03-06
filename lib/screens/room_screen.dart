@@ -75,7 +75,6 @@ class _RoomScreenState extends State<RoomScreen> {
                     );
                   },
                   child: Card(
-                    elevation: 0,
                     child: Padding(
                       padding: const EdgeInsets.all(16.0),
                       child: ListTile(

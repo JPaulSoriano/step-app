@@ -114,7 +114,7 @@ class _AnnouncementCommentScreenState extends State<AnnouncementCommentScreen> {
                                         widget.announcement.comments![index]
                                             .user!,
                                         style: TextStyle(
-                                            fontWeight: FontWeight.w600,
+                                            fontWeight: FontWeight.w500,
                                             fontSize: 16),
                                       ),
                                       Text(
@@ -126,6 +126,7 @@ class _AnnouncementCommentScreenState extends State<AnnouncementCommentScreen> {
                                   ),
                                 ],
                               ),
+                              SizedBox(height: 18),
                               Text(
                                 widget.announcement.comments![index].body!,
                               )

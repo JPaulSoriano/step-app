@@ -48,8 +48,9 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
               return Card(
                 child: ListTile(
                   title: Text(notification['data']['type'],
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                      style: TextStyle(
+                        fontSize: 16,
+                      )),
                   subtitle: Text(notification['data']['title'],
                       style: TextStyle(fontSize: 14, color: Colors.grey)),
                   trailing: Text(

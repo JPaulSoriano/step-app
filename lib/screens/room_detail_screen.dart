@@ -141,15 +141,19 @@ class _RoomDetailScreenState extends State<RoomDetailScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text(
-                      announcement.title?.isEmpty ?? true
-                          ? 'No Title'
-                          : announcement.title!,
-                      style:
-                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                      announcement.user!,
+                      style: TextStyle(fontSize: 16, color: Colors.black),
                     ),
                     Text(
                       '${DateFormat.yMMMMd().format(DateTime.parse(announcement.created!))}',
                       style: TextStyle(fontSize: 12, color: Colors.grey),
+                    ),
+                    SizedBox(height: 18),
+                    Text(
+                      announcement.title?.isEmpty ?? true
+                          ? 'No Title'
+                          : announcement.title!,
+                      style: TextStyle(fontSize: 14),
                     ),
                     Html(data: announcement.body),
                     Text(

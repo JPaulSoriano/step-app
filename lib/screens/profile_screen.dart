@@ -55,6 +55,16 @@ class _ProfileState extends State<Profile> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                Container(
+                  width: 110,
+                  height: 110,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(60),
+                      image: DecorationImage(
+                          image: NetworkImage('${user!.avatar}'),
+                          fit: BoxFit.cover)),
+                ),
+                SizedBox(height: 8),
                 Text(
                   '${user!.email}',
                   style: TextStyle(fontWeight: FontWeight.w600, fontSize: 17),
