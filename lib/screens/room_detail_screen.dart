@@ -4,8 +4,8 @@ import 'package:flutter_html/flutter_html.dart';
 import 'package:intl/intl.dart';
 import 'package:step/models/room_model.dart';
 import 'package:http/http.dart' as http;
-import 'package:step/screens/announcement_comment_screen.dart';
 import 'package:step/screens/assignment_detail_screen.dart';
+import 'package:step/screens/comment_screen.dart';
 
 class RoomDetailScreen extends StatefulWidget {
   final Room room;
@@ -127,13 +127,10 @@ class _RoomDetailScreenState extends State<RoomDetailScreen> {
           return Card(
             child: InkWell(
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) =>
-                        AnnouncementCommentScreen(announcement: announcement),
-                  ),
-                );
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => CommentScreen(
+                          announcementID: announcement.id,
+                        )));
               },
               child: Padding(
                 padding: EdgeInsets.all(16.0),
