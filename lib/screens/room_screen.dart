@@ -75,6 +75,13 @@ class _RoomScreenState extends State<RoomScreen> {
                     );
                   },
                   child: Card(
+                    elevation: 0,
+                    shape: RoundedRectangleBorder(
+                      side: BorderSide(
+                        color: Colors.black26,
+                      ),
+                      borderRadius: BorderRadius.circular(10.0), //<-- SEE HERE
+                    ),
                     child: Padding(
                       padding: const EdgeInsets.all(16.0),
                       child: ListTile(

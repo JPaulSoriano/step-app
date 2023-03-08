@@ -46,6 +46,13 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
             itemBuilder: (BuildContext context, int index) {
               final notification = notifications[index];
               return Card(
+                elevation: 0,
+                shape: RoundedRectangleBorder(
+                  side: BorderSide(
+                    color: Colors.black26,
+                  ),
+                  borderRadius: BorderRadius.circular(10.0), //<-- SEE HERE
+                ),
                 child: ListTile(
                   title: Text(notification['data']['type'],
                       style: TextStyle(

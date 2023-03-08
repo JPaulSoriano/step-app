@@ -21,10 +21,12 @@ const somethingWentWrong = 'Something went wrong, try again!';
 /// Returns an input decoration with a label and a border.
 InputDecoration kInputDecoration(String label) {
   return InputDecoration(
-      labelText: label,
-      contentPadding: EdgeInsets.all(10),
-      border: OutlineInputBorder(
-          borderSide: BorderSide(width: 1, color: Colors.black)));
+    labelText: label,
+    contentPadding: EdgeInsets.all(10),
+    border: OutlineInputBorder(
+        borderSide: BorderSide(width: 1, color: Colors.black),
+        borderRadius: BorderRadius.circular(20)),
+  );
 }
 
 // ----- Button Widget -----

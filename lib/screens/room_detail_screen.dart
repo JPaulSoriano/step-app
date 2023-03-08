@@ -38,8 +38,11 @@ class _RoomDetailScreenState extends State<RoomDetailScreen> {
       body: Column(
         children: [
           Card(
-            color: Colors.blueGrey[500],
             elevation: 0,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10.0), //<-- SEE HERE
+            ),
+            color: Colors.blueGrey[500],
             child: Padding(
               padding: const EdgeInsets.all(24.0),
               child: ListTile(
@@ -125,6 +128,13 @@ class _RoomDetailScreenState extends State<RoomDetailScreen> {
         itemBuilder: (context, index) {
           final announcement = widget.room.announcements![index];
           return Card(
+            elevation: 0,
+            shape: RoundedRectangleBorder(
+              side: BorderSide(
+                color: Colors.black26,
+              ),
+              borderRadius: BorderRadius.circular(10.0), //<-- SEE HERE
+            ),
             child: InkWell(
               onTap: () {
                 Navigator.of(context).push(MaterialPageRoute(
@@ -176,6 +186,13 @@ class _RoomDetailScreenState extends State<RoomDetailScreen> {
         itemBuilder: (context, index) {
           final assessment = widget.room.assessments![index];
           return Card(
+            elevation: 0,
+            shape: RoundedRectangleBorder(
+              side: BorderSide(
+                color: Colors.black26,
+              ),
+              borderRadius: BorderRadius.circular(10.0), //<-- SEE HERE
+            ),
             child: Padding(
               padding: EdgeInsets.all(16.0),
               child: Column(
@@ -218,6 +235,13 @@ class _RoomDetailScreenState extends State<RoomDetailScreen> {
         itemBuilder: (context, index) {
           final material = widget.room.materials![index];
           return Card(
+            elevation: 0,
+            shape: RoundedRectangleBorder(
+              side: BorderSide(
+                color: Colors.black26,
+              ),
+              borderRadius: BorderRadius.circular(10.0), //<-- SEE HERE
+            ),
             child: InkWell(
               onTap: () {
                 _downloadFile(material.url!);
@@ -256,6 +280,13 @@ class _RoomDetailScreenState extends State<RoomDetailScreen> {
         itemBuilder: (context, index) {
           final assignment = widget.room.assignments![index];
           return Card(
+            elevation: 0,
+            shape: RoundedRectangleBorder(
+              side: BorderSide(
+                color: Colors.black26,
+              ),
+              borderRadius: BorderRadius.circular(10.0), //<-- SEE HERE
+            ),
             child: InkWell(
               onTap: () {
                 Navigator.push(

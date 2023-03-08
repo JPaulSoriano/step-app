@@ -79,110 +79,118 @@ class _CommentScreenState extends State<CommentScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Comments'),
+        elevation: 0,
+        scrolledUnderElevation: 2,
       ),
       body: _loading
           ? Center(
               child: CircularProgressIndicator(),
             )
-          : Column(children: [
-              Expanded(
-                  child: RefreshIndicator(
-                      onRefresh: () {
-                        return _getComments();
-                      },
-                      child: ListView.builder(
-                          itemCount: _commentsList.length,
-                          itemBuilder: (BuildContext context, int index) {
-                            Comment comment = _commentsList[index];
-                            return Container(
-                              padding: EdgeInsets.all(10),
-                              width: MediaQuery.of(context).size.width,
-                              decoration: BoxDecoration(
-                                  border: Border(
-                                      bottom: BorderSide(
-                                          color: Colors.black26, width: 0.5))),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
+          : _commentsList.isEmpty
+              ? Center(
+                  child: Text('No Class Comments'),
+                )
+              : Column(children: [
+                  Expanded(
+                      child: RefreshIndicator(
+                          onRefresh: () {
+                            return _getComments();
+                          },
+                          child: ListView.builder(
+                              itemCount: _commentsList.length,
+                              itemBuilder: (BuildContext context, int index) {
+                                Comment comment = _commentsList[index];
+                                return Container(
+                                  padding: EdgeInsets.all(10),
+                                  width: MediaQuery.of(context).size.width,
+                                  decoration: BoxDecoration(
+                                      border: Border(
+                                          bottom: BorderSide(
+                                              color: Colors.black26,
+                                              width: 0.5))),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
                                         children: [
-                                          Container(
-                                            width: 30,
-                                            height: 30,
-                                            decoration: BoxDecoration(
-                                              image: comment.avatar != null
-                                                  ? DecorationImage(
-                                                      image: NetworkImage(
-                                                          '${comment.avatar}'),
-                                                      fit: BoxFit.cover)
-                                                  : null,
-                                              borderRadius:
-                                                  BorderRadius.circular(15),
-                                            ),
-                                          ),
-                                          SizedBox(
-                                            width: 10,
-                                          ),
-                                          Text(
-                                            '${comment.user!}',
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.w600,
-                                                fontSize: 16),
-                                          ),
-                                          Text(
-                                            '${DateFormat.yMMMMd().format(DateTime.parse(comment.created!))} ${DateFormat.Hm().format(DateTime.parse(comment.created!))}',
-                                            style: TextStyle(
-                                              fontSize: 12,
-                                              color: Colors.grey,
-                                            ),
+                                          Row(
+                                            children: [
+                                              Container(
+                                                width: 30,
+                                                height: 30,
+                                                decoration: BoxDecoration(
+                                                  image: comment.avatar != null
+                                                      ? DecorationImage(
+                                                          image: NetworkImage(
+                                                              '${comment.avatar}'),
+                                                          fit: BoxFit.cover)
+                                                      : null,
+                                                  borderRadius:
+                                                      BorderRadius.circular(15),
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                width: 10,
+                                              ),
+                                              Text(
+                                                '${comment.user!}',
+                                                style: TextStyle(
+                                                    fontWeight: FontWeight.w600,
+                                                    fontSize: 16),
+                                              ),
+                                              Text(
+                                                '${DateFormat.yMMMMd().format(DateTime.parse(comment.created!))} ${DateFormat.Hm().format(DateTime.parse(comment.created!))}',
+                                                style: TextStyle(
+                                                  fontSize: 12,
+                                                  color: Colors.grey,
+                                                ),
+                                              ),
+                                            ],
                                           ),
                                         ],
                                       ),
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      Text('${comment.body}')
                                     ],
                                   ),
-                                  SizedBox(
-                                    height: 10,
-                                  ),
-                                  Text('${comment.body}')
-                                ],
-                              ),
-                            );
-                          }))),
-              Container(
-                width: MediaQuery.of(context).size.width,
-                padding: EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                  border: Border(
-                      top: BorderSide(color: Colors.black26, width: 0.5)),
-                ),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: TextFormField(
-                        decoration: kInputDecoration('Comment'),
-                        controller: _txtCommentController,
-                      ),
+                                );
+                              }))),
+                  Container(
+                    width: MediaQuery.of(context).size.width,
+                    padding: EdgeInsets.all(15),
+                    decoration: BoxDecoration(
+                      border: Border(
+                          top: BorderSide(color: Colors.black26, width: 0.5)),
                     ),
-                    IconButton(
-                      icon: Icon(Icons.send),
-                      onPressed: () {
-                        if (_txtCommentController.text.isNotEmpty) {
-                          setState(() {
-                            _loading = true;
-                          });
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: TextFormField(
+                            decoration: kInputDecoration('Comment'),
+                            controller: _txtCommentController,
+                          ),
+                        ),
+                        IconButton(
+                          icon: Icon(Icons.send),
+                          onPressed: () {
+                            if (_txtCommentController.text.isNotEmpty) {
+                              setState(() {
+                                _loading = true;
+                              });
 
-                          _createComment();
-                        }
-                      },
-                    )
-                  ],
-                ),
-              )
-            ]),
+                              _createComment();
+                            }
+                          },
+                        )
+                      ],
+                    ),
+                  )
+                ]),
     );
   }
 }
